@@ -1,31 +1,13 @@
 
 > Otevřít tuto stránku v aplikaci [https://prokopvasak.github.io/motor_test/](https://prokopvasak.github.io/motor_test/)
 
-## Použít jako rozšíření
+## Popis funkce
 
-Toto úložiště lze přidat jako **rozšíření** v aplikaci MakeCode.
+Jak funguje: Motor se začne točit na pár sekund a čidlo počítá počet otáček(pomocí h206 senzoru) při pomalé, střední a rychlé rychlosti. Po změření se do konzole vypíše výsledek po každém testu. Na konci testování se vezme průměrný počet otočení a motor dostane “známku“ od jedné do deseti(1=malý počet otáček, 10=velký počet otáček).
 
-* otevřít [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* klikněte na možnost **Nový projekt**
-* klikněte na možnost **Rozšíření** v nabídce s ozubeným kolem
-* vyhledat **https://github.com/prokopvasak/motor_test** a importovat
+## Potřebné rozšíření
 
-## Upravit tento projekt ![Odznak stavu sestavení](https://github.com/prokopvasak/motor_test/workflows/MakeCode/badge.svg)
+https://github.com/TomasKazda/pxt-magicbit-pca9685.git
 
-Slouží k úpravě tohoto úložiště v aplikaci MakeCode.
+## in progress
 
-* otevřít [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* klikněte na možnost **Import** a poté na **Import adresy URL**
-* vložte **https://github.com/prokopvasak/motor_test** a klikněte na možnost import
-
-## Náhled bloků
-
-Tento obrázek znázorňuje kód z Bloků od posledního potvrzení v hlavní verzi.
-Tento obrázek se může aktualizovat až za několik minut.
-
-![Vykreslený náhled bloků](https://github.com/prokopvasak/motor_test/raw/master/.github/makecode/blocks.png)
-
-#### Metadata (slouží k vyhledávání, vykreslování)
-
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
