@@ -1,66 +1,89 @@
-sensor_pin = DigitalPin.P13
-slow = 30
-mid = 60
-fast = 90
-turns = [0, 0, 0]
+run1 = 0
+run2 = 0
+run3 = 0
+
+
 
 def Test():
-    Block(slow, 500, 500, 0 )
-    Block(mid, 500, 500, 1 )
-    Block(fast, 500, 500, 2 )
-    Score(turns)
+    print("test func")
+    
+    slow = 100
+    mid = 120
+    fast = 140
+
+    PCAmotor.motor_run(PCAmotor.Motors.M2, 200)
+    basic.pause(5000)
+    Block(fast, 1000, 1000, 0 )
+    Block(mid, 1000, 1000, 1 )
+    Block(slow, 1000, 1000, 2 )
+    PCAmotor.motor_run(PCAmotor.Motors.M2, 0)
+    
+    
 input.on_button_pressed(Button.A, Test)
 
-def Block(speed, pause, time_ms, index):
+def Stop():
+    PCAmotor.motor_run(PCAmotor.Motors.M2, 0)
+input.on_button_pressed(Button.B, Stop)
+
+def Block(speed, pause, number, index):
+    print("block func")
+    
     Speed(speed)
     basic.pause(pause)
-    turns[index] = TurnsCount(time_ms)
+    TurnsCount(number , index)
 
 def Speed(speed):
-    PCAmotor.motor_run(PCAmotor.Motors.M1, speed)
+    print("speed func")
+    PCAmotor.motor_run(PCAmotor.Motors.M3, speed)
 
-def TurnsCount(x):
-    turns_count = 0
-    for i in range(x):
-        if sensor_pin == 1:
-            turns_count += 1
-            basic.pause(10)
-    return turns_count
+def TurnsCount(x, index):
+    global run1, run2, run3
+    
+    print("turnscount func")
+    turnscount = 0
+    y = 0
+    while (x != y):
+        if  pins.analog_read_pin(AnalogPin.P0) > 100:
+            turnscount += 1 
+        basic.pause(1)
+        y +=1
+    if index == 0: run1 = turnscount
+    elif index == 1: run2 =turnscount
+    else: run3 = turnscount
+    
 
-def Score(info):
-    COUNT = 0
-    SUM = 0
-    AVG = 0
-    for i in info:
-        SUM += info[i]
-        COUNT = i
-    AVG = SUM/COUNT
-    Grade(AVG)
 
-def Grade(AVG):
-    hodnota = 0
+
+    
+
+def Grade():
+    global run1, run2, run3
+    print("grade func")
+    print(run1)
+    print(run2)
+    print(run3)
+    AVG = (run1+run2+run3)/3
     grade = 0
-    if AVG >= hodnota:
+    if AVG > 450:
         grade = 10
-    elif AVG >= hodnota:
+    elif AVG >= 440:
         grade = 9
-    elif AVG >= hodnota:
+    elif AVG >= 430:
         grade = 8
-    elif AVG >= hodnota:
+    elif AVG >= 420:
         grade = 7
-    elif AVG >= hodnota:
+    elif AVG >= 410:
         grade = 6
-    elif AVG >= hodnota:
+    elif AVG >= 400:
         grade = 5
-    elif AVG >= hodnota:
+    elif AVG >= 390:
         grade = 4
-    elif AVG >= hodnota:
+    elif AVG >= 380:
         grade = 3
-    elif AVG >= hodnota:
+    elif AVG >= 370:
         grade = 2
     else:
         grade = 1
     print(grade)
     basic.show_number(grade)
-
-
+input.on_button_pressed(Button.B, Grade)
